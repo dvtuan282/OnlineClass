@@ -1,0 +1,511 @@
+{% extends "/default/base.html" %}
+{% block title %} Online class | Lớp {% endblock %}
+<!-- ============================Content================================== -->
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- background -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="position: relative;">
+                        <!-- Hình ảnh -->
+                        <img src="/static/default/assets/images/bg-1.jpg" style="height: 200px; width: 100%;"
+                             alt="">
+
+                        <!-- Văn bản nằm giữa hình ảnh -->
+                        <div
+                                style="position: absolute; top: 80%; left: 7%; transform: translate(-50%, -50%); text-align: center; color: white;">
+                            <h2 style="font-weight: bold; font-size: 30px; color: #f8f9fa;">{{ infor_class.className }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-2">
+                    <div style="border-radius: 8px; border: 2px solid white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); height: 120px;"
+                         class="maLop">
+                        <p class="mt-4 font-size-16" style="margin-left: 15px;">Mã lớp:</p>
+                        <h2 style="text-align: center;">{{ infor_class.id }}</h2>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <!-- đăng bài -->
+                    <div class="card-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#baiViet" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                    <span class="d-none d-sm-block">Bài viết</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#baiTap" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block">Bài tập</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#thanhVien" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                    <span class="d-none d-sm-block">Thành viên</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#thongTinLop" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                    <span class="d-none d-sm-block">Thông tin lớp</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content p-3 text-muted">
+                            <!-- bài viết -->
+                            <div class="tab-pane active" id="baiViet" role="tabpanel">
+                                <div class="accordion-item">
+                                    <!-- tạo bài viết -->
+                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                        <button class="accordion-button fw-medium" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Tạo bài viết
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                                         aria-labelledby="flush-headingTwo"
+                                         data-bs-parent="#accordionFlushExample">
+                                        <div style="height: 200px;" class="maLop">
+                                            <div class="card-footer py-3 border-0"
+                                                 style="background-color: #f8f9fa;">
+                                                <div class="d-flex flex-start w-100">
+                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                         alt="avatar" width="40" height="40"/>
+                                                    <div class="form-outline w-100">
+                                                                <textarea class="form-control" id="textAreaExample"
+                                                                          rows="4" style="background: #fff;"
+                                                                          ng-model="content"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="float-end mt-2 pt-1">
+                                                    <button type="button" ng-click="createPost()"
+                                                            class="btn btn-primary btn-sm">Đăng
+                                                        bài
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-outline-primary btn-sm">Hủy
+                                                        bỏ
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- bài đăng -->
+                                {% for post_in_class in infor_class.post %}
+                                    <div class="card mt-4">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-start align-items-center">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                     alt="avatar" width="60" height="60"/>
+                                                <div>
+                                                    <h6 class="fw-bold text-primary mb-1">{{ post_in_class.account_post.name }}</h6>
+                                                    <p class="text-muted small mb-0">
+                                                        {{ post_in_class.datePosted }}
+                                                    </p>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <div class="btn-group dropend">
+                                                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i data-feather="align-justify"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#"
+                                                               ng-click="deletePost({{ post_in_class.id }})">Xóa
+                                                                Thông báo</a>
+                                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                               data-bs-target=".bs-example-modal-xl"
+                                                               ng-click="findById({{ post_in_class.id }})" href="#">Chỉnh
+                                                                sửa</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p class="mt-3 mb-4 pb-2">
+                                                {{ post_in_class.content }}
+                                            </p>
+                                            <!--  -->
+                                            <div class="accordion-item">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button fw-medium collapsed"
+                                                                type="button" data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseTwo"
+                                                                aria-expanded="false"
+                                                                aria-controls="flush-collapseTwo">
+                                                            Hiển thị bình luận
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                         aria-labelledby="flush-headingTwo"
+                                                         data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body text-muted">
+                                                            {% for commentShow in post_in_class.comment %}
+                                                                <div class="d-flex flex-start w-100">
+                                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                                         alt="avatar" width="40" height="40"/>
+                                                                    <div class="form-outline w-100">
+                                                                        <p>
+                                                                            <b> {{ commentShow.account_comment.name }}</b>
+                                                                            {{ commentShow.dateComment }}</p>
+                                                                        <p>{{ commentShow.content }}</p>
+                                                                    </div>
+                                                                    <div class="form-outline w-100">
+                                                                        <div class="btn-group dropend">
+                                                                            <a href="#"
+                                                                               data-bs-toggle="dropdown"
+                                                                               aria-expanded="false"><i
+                                                                                    data-feather="more-horizontal"></i></a>
+
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item"
+                                                                                   ng-click="deleteComment({{ commentShow.id }})"
+                                                                                   href="#">Xóa
+                                                                                    bình luận</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                            <hr>
+                                                            <div class="d-flex flex-start w-100">
+                                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                                     alt="avatar" width="40" height="40"/>
+                                                                <div class="form-outline w-100">
+                                                                        <textarea class="form-control"
+                                                                                  id="textAreaExample"
+                                                                                  ng-model="comment" rows="4"
+                                                                                  style="background: #fff; width: 70%; height: 30px;"></textarea>
+                                                                </div>
+                                                                <div class="form-outline w-100">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary btn-sm"
+                                                                            style="height: 35px;"
+                                                                            ng-click="postComment({{ post_in_class.id }})">
+                                                                        Gửi
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- bài tập -->
+                            <div class="tab-pane" id="baiTap" role="tabpanel">
+
+                            </div>
+                            <!-- Thành viên -->
+                            <div class="tab-pane" id="thanhVien" role="tabpanel">
+                                <div class="row">
+                                    <div class="mt-4 mb-4">
+                                        <h3>Chủ phòng</h3>
+                                        <hr>
+                                        <div class="d-flex flex-start align-items-center">
+                                            <img class="rounded-circle shadow-1-strong me-3"
+                                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                 alt="avatar" width="60" height="60"/>
+                                            <div>
+                                                <h3 class="mb-1">{{ infor_class.account_class.name }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 mb-4">
+                                        <h3>Thành viên</h3>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <h5 class="card-title">Danh sách thành
+                                                                        viên<span
+                                                                                class="text-muted fw-normal ms-2">(834)</span>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div
+                                                                        class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                                                    <div>
+                                                                        <a data-lang="sp" data-bs-toggle="modal"
+                                                                           data-bs-target="#themThanhVien" href="#"
+                                                                           class="btn btn-light">
+                                                                            <i class="bx bx-plus me-1"></i>Thêm
+                                                                            thành viên</a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- end row -->
+                                                        <div class="table-responsive mb-4">
+                                                            <table
+                                                                    class="table align-middle datatable dt-responsive table-check nowrap"
+                                                                    style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col" style="width: 50px;">
+                                                                        <div
+                                                                                class="form-check font-size-16">
+                                                                            <input type="checkbox"
+                                                                                   class="form-check-input"
+                                                                                   id="checkAll">
+                                                                            <label class="form-check-label"
+                                                                                   for="checkAll"></label>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th scope="col">Tên</th>
+                                                                    <th scope="col">Email</th>
+                                                                    <th scope="col">Trạng thái</th>
+                                                                    <th scope="col">...</th>
+
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for a in listMember %}
+                                                                    <tr>
+                                                                        <th scope="row">
+                                                                            <div
+                                                                                    class="form-check font-size-16">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="contacusercheck11">
+                                                                                <label class="form-check-label"
+                                                                                       for="contacusercheck11"></label>
+                                                                            </div>
+                                                                        </th>
+                                                                        <td>
+                                                                            <img src="/static/default/assets/images/users/avatar-2.jpg"
+                                                                                 alt=""
+                                                                                 class="avatar-sm rounded-circle me-2">
+                                                                            <a href="#"
+                                                                               class="text-body">{{ a.account_classMember.email }}</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#"
+                                                                               class="text-body">{{ a.account_classMember.name }}</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if a.status == 1 %}
+                                                                                <a href="#"
+                                                                                   class="text-body" style="color: red">Chưa
+                                                                                    tham gia</a>
+                                                                            {% endif %}
+                                                                            {% if a.status == 0 %}
+                                                                                <a href="#"
+                                                                                   class="text-body"
+                                                                                   style="color: green">Đã tham gia</a>
+                                                                            {% endif %}
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#"
+                                                                               class="text-body" style="color: green"
+                                                                               ng-click="deleteClassMember({{ a.id }})"><i
+                                                                                    class="bx bxs-trash-alt"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- end table responsive -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="thongTinLop" role="tabpanel">
+                                <p class="mb-0">
+                                    Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                    sold out mcsweeney's organic lomo retro fanny pack lo-fi
+                                    farm-to-table readymade. Messenger bag gentrify pitchfork
+                                    tattooed craft beer, iphone skateboard locavore carles etsy
+                                    salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                                    Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
+                                    mi whatever gluten-free.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script>
+                            © Dason.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by <a href="#!"
+                                                       class="text-decoration-underline">Themesbrand</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <!-- ====Modal=== -->
+    <!-- chỉnh sửa bài viết -->
+    <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Chỉnh sửa bài viết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-item">
+                        <!-- tạo bài viết -->
+                        <div>
+                            <div style="height: 200px;" class="maLop">
+                                <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                    <div class="d-flex flex-start w-100">
+                                        <img class="rounded-circle shadow-1-strong me-3"
+                                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                             alt="avatar" width="40" height="40"/>
+                                        <div class="form-outline w-100">
+                                                    <textarea class="form-control" id="textAreaExample" rows="4"
+                                                              style="background: #fff;"
+                                                              ng-model="contentEdit"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="float-end mt-2 pt-1">
+                                        <button type="button" ng-click="editPost()"
+                                                class="btn btn-primary btn-sm">Cập nhật
+                                        </button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm">Hủy
+                                            bỏ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- Tạo class -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Thêm lớp học</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Tên lớp:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Tạo lớp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vào lớp học -->
+    <div class="modal fade" id="thamGiaLop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tham gia lớp</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Mã lớp:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Vào lớp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- thêm thành viên -->
+    <div class="modal fade" id="themThanhVien" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Thêm thành viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="width: 500px;">
+                    <div class="mb-3">
+                        <select class="form-control" data-trigger name="choices-multiple-default"
+                                id="choices-multiple-default" placeholder="This is a placeholder" multiple
+                                ng-model="accounts">
+                            {% for a in list_account %}
+                                <option value="{{ a.email }}">
+                                    {{ a.name }} ({{ a.email }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" ng-click="addMember()">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% blockend %}
+<!-- ============================End content============================== -->
+
