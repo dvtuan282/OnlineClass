@@ -23,21 +23,21 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
-    <script src="/static/AngularJS/Account.js"></script>
+    <script src="/static/AngularJS/accountAngularJS.js"></script>
 </head>
 
 <body data-topbar="dark">
 
 <!-- <body data-layout="horizontal"> -->
 <div class="auth-page">
-    <div class="container-fluid p-0" ng-app="dangKy-app" ng-controller="dangKy-ctrl">
+    <div class="container-fluid p-0" ng-app="account-app" ng-controller="account-ctrl">
         <div class="row g-0">
             <div class="col-xxl-3 col-lg-4 col-md-5">
                 <div class="auth-full-page-content d-flex p-sm-5 p-4">
                     <div class="w-100">
                         <div class="d-flex flex-column h-100">
                             <div class="mb-4 mb-md-5 text-center">
-                                <a href="index.html" class="d-block auth-logo">
+                                <a href="/onlineClass/home" class="d-block auth-logo">
                                     <img src="/static/default/assets/images/logo-sm.svg" alt="" height="28"> <span
                                         class="logo-txt">ClassOn</span>
                                 </a>
@@ -84,7 +84,7 @@
                                 <div class="mb-4">
                                     <p class="mb-0">Mã xác nhận được gửi về mail của bạn<a href="#"
                                                                                            class="text-primary"
-                                                                                           ng-click="sendCode()">Gửi
+                                                                                           ng-click="sendVerificationCode()">Gửi
                                         mã</a></p>
                                 </div>
                                 <div class="mb-3">

@@ -28,10 +28,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
-    <script src="/static/AngularJS/TrangChu.js"></script>
+    <script src="/static/AngularJS/homeAngularJS.js"></script>
+    <script src="/static/AngularJS/accountAngularJS.js"></script>
+    <script src="/static/AngularJS/ClassAngularJS.js"></script>
+
 </head>
 
-<body data-topbar="dark" ng-app="trangChu-app" ng-controller="trangChu-ctrl">
+<body data-topbar="dark">
 
 <!-- <body data-layout="horizontal"> -->
 
@@ -174,51 +177,7 @@
 
 
 </div>
-<!-- ====Modal=== -->
-<!-- Tạo class -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Thêm lớp học</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Tên lớp:</label>
-                    <input type="text" class="form-control" ng-model="className" id="recipient-name">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" ng-click="createClass()" class="btn btn-primary">Tạo lớp</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Vào lớp học -->
-<div class="modal fade" id="thamGiaLop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Tham gia lớp</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Mã lớp:</label>
-                    <input type="text" class="form-control" ng-model="idClass" id="recipient-name">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" ng-click="joinClass()" class="btn btn-primary">Vào lớp</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- JAVASCRIPT -->
 <script src="/static/default/assets/libs/jquery/jquery.min.js"></script>
 <script src="/static/default/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

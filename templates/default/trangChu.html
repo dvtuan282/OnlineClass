@@ -2,7 +2,7 @@
 {% block title %} Online class | Trang chủ {% endblock %}
 
 {% block content %}
-    <div class="main-content">
+    <div class="main-content" ng-app="home-app" ng-controller="home-ctrl">
         <div class="page-content">
             <div class="container-fluid">
 
@@ -17,25 +17,22 @@
                 <!-- end page title -->
 
                 <div class="row">
-{#                    {% if classOn |length  == 0 %}#}
-{#                        <div style="width: 100%; height: 100px; background-color: whitesmoke">#}
-{#                            <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>#}
-{#                        </div>#}
-{#                    {% endif %}#}
-{#                    {% for class_info in classOn %}#}
-{#                        <div class="col-xl-3 col-md-6">#}
-{#                            <div class="card card-h-400"#}
-{#                                 style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">#}
-{#                                <div class="card-body">#}
-{#                                    <h1 class="card-title" style="color: white">{{ class_info.className }}</h1>#}
-{#                                    <p class="card-text">#}
-{#                                        <a href="#" style="color: white; ">{{ class_info.creator }}</a>#}
-{#                                    </p>#}
-{#                                    <a href="/lop/{{ class_info.id }}" class="btn btn-primary">Vào lớp</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
+                    <div ng-if="lisClassOfAccount.length == 0"
+                         style="width: 100%; height: 100px; background-color: whitesmoke">
+                        <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>
+                    </div>
+                    <div class="col-xl-3 col-md-6" ng-repeat="i in lisClassOfAccount">
+                        <div class="card card-h-400"
+                             style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">
+                            <div class="card-body">
+                                <h1 class="card-title" style="color: white">[[ i.className ]]</h1>
+                                <p class="card-text">
+                                    <a href="#" style="color: white; ">[[ i.creator ]]</a>
+                                </p>
+                                <a href="/OnlineClass/class/[[ i.id ]]" class="btn btn-primary">Vào lớp</a>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -49,25 +46,23 @@
                 <!-- end page title -->
 
                 <div class="row">
-{#                    {% if class_participated |length  == 0 %}#}
-{#                        <div style="width: 100%; height: 100px; background-color:  whitesmoke">#}
-{#                            <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>#}
-{#                        </div>#}
-{#                    {% endif %}#}
-{#                    {% for class in class_participated %}#}
-{#                        <div class="col-xl-3 col-md-6">#}
-{#                            <div class="card card-h-400"#}
-{#                                 style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">#}
-{#                                <div class="card-body">#}
-{#                                    <h1 class="card-title" style="color: white">{{ class.className }}</h1>#}
-{#                                    <p class="card-text">#}
-{#                                        <a href="#" style="color: white; ">Duong Van Tuan</a>#}
-{#                                    </p>#}
-{#                                    <a href="/lop/{{ class.id }}" class="btn btn-primary">Vào lớp</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
+
+                    <div ng-if="listOfClassInvovled.length == 0"
+                         style="width: 100%; height: 100px; background-color:  whitesmoke">
+                        <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>
+                    </div>
+                    <div class="col-xl-3 col-md-6" ng-repeat="i in listOfClassInvovled">
+                        <div class="card card-h-400"
+                             style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">
+                            <div class="card-body">
+                                <h1 class="card-title" style="color: white">[[ i.className ]]</h1>
+                                <p class="card-text">
+                                    <a href="#" style="color: white; ">[[i.creator]]</a>
+                                </p>
+                                <a href="" class="btn btn-primary">Vào lớp</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- end row-->
             </div>
@@ -90,5 +85,28 @@
                 </div>
             </div>
         </footer>
+        <!-- ====Modal=== -->
+        <!-- Tạo class -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Thêm lớp học</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Tên lớp:</label>
+                            <input type="text" class="form-control" ng-model="className" id="recipient-name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" ng-click="createClass()" class="btn btn-primary">Tạo lớp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
