@@ -10,8 +10,10 @@ class ClassMemberModel(db.Model):
     status = db.Column(db.Integer, default=0)
 
 
-class ClassMemberSchema(ma.Schema):
+class ClassMemberSchema(ma.SQLAlchemySchema):
+    # classOn = ma.Nested(ClassSchema, only=('id', 'className', 'creator'))
     class Meta:
+        model = ClassMemberModel
         fields = ('id', 'classOn', 'account', 'status')
 
     @post_load

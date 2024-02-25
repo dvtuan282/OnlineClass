@@ -1,0 +1,29 @@
+from flask import Blueprint
+import Services.ClassMemberService as classMemberService
+
+classMemberRoute = Blueprint('classMemberRoute', __name__)
+
+
+@classMemberRoute.route('/OnlineClass/member/<idClass>', methods=['GET'])
+def listMemberInClass(idClass):
+    return classMemberService.showMemberInClass(idClass)
+
+
+@classMemberRoute.route('/OnlineClass/member', methods=['POST'])
+def createMemberInClass():
+    return classMemberService.createMemberInClass()
+
+
+@classMemberRoute.route('/OnlineClass/member/<idClass>', methods=['PUT'])
+def confirmJoinClass(idClass):
+    return classMemberService.confirmJoinClass(idClass)
+
+
+@classMemberRoute.route('/OnlineClass/member/<idClassMember>', methods=['DELETE'])
+def deleteMemberInClass(idClassMember):
+    return classMemberService.deleteMember(idClassMember)
+
+
+@classMemberRoute.route('/OnlineClass/listInvitation', methods=['GET'])
+def listInvitation():
+    return classMemberService.listInvite()

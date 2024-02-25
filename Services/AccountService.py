@@ -72,7 +72,7 @@ def forgotPassword(email):
 
 
 def listAccount():
-    return AccountModel.query.all()
+    return accountsSchema.dump(AccountModel.query.all())
 
 
 def inforAccount():

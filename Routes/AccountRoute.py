@@ -36,3 +36,7 @@ def logout():
 def login_account():
     return accountService.loginAccount()
 
+
+@accountRoute.route('/OnlineClass/account', methods=['GET'])
+def listAccount():
+    return accountService.listAccount()

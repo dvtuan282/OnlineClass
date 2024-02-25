@@ -1,69 +1,66 @@
-
 {% extends "/default/base.html" %}
 {% block title %} Online class | Lời mời {% endblock %}
 <!-- ============================Content================================== -->
 {% block content %}
-<div class="main-content">
+    <div class="main-content" ng-app="class-app" ng-controller="class-ctrl">
 
-    <div class="page-content">
-        <div class="container-fluid">
+        <div class="page-content">
+            <div class="container-fluid">
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Danh sách</h4>
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Danh sách</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- end page title -->
+                <!-- end page title -->
 
-            <div class="row">
+                <div class="row">
 
-                <div style="width: 100%; height: 100px; background-color:  whitesmoke">
-                    <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>
-                </div>
-                {% for class_info in invite_class %}
-                    <form method="post"
-                          action="http://127.0.0.1:5000/classOn/confirm-join-class/{{ class_info.id }}">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card card-h-400"
-                                 style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">
-                                <div class="card-body">
-                                    <h1 class="card-title" style="color: white">{{ class_info.className }}</h1>
-                                    <p class="card-text">
-                                        <a href="#" style="color: white; ">{{ class_info.creator }}</a>
-                                    </p>
-                                    <button type="submit" class="btn btn-primary">Tham gia</button>
-                                </div>
+                    <div ng-if="listInvitation.length == 0"
+                         style="width: 100%; height: 100px; background-color:  whitesmoke">
+                        <h2 style="text-align: center;margin-top: 40px">Không có lớp</h2>
+                    </div>
+
+                    <div ng-repeat="i in listInvitation" class="col-xl-3 col-md-6">
+                        <div class="card card-h-400"
+                             style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">
+                            <div class="card-body">
+                                <h1 class="card-title" style="color: white">[[ i.account ]]</h1>
+                                <p class="card-text">
+                                    <a href="#" style="color: white; ">[[ i.classOn ]]</a>
+                                </p>
+                                <button type="button" ng-click="confirmJoinClass(i.id)" class="btn btn-primary">Tham
+                                    gia
+                                </button>
                             </div>
                         </div>
-                    </form>
-                {% endfor %}
-
-            </div>
-            <!-- end row-->
-        </div>
-        <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
-
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <script>document.write(new Date().getFullYear())</script>
-                    © Dason.
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end d-none d-sm-block">
-                        Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
+                <!-- end row-->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Dason.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-</div>
-{% blockend %}
+        </footer>
+    </div>
+{% endblock %}
 <!-- =============================End content============================ -->
 

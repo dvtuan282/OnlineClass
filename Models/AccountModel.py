@@ -37,7 +37,7 @@ class AccountModel(UserMixin, db.Model):
 
 class AccountSchema(ma.Schema):
     class Meta:
-        fields = ('email', 'password', 'name', 'avatar', '')
+        fields = ('email', 'password', 'name', 'avatar')
 
     @post_load
     def make_account(self, data, **kwargs):

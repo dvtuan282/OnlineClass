@@ -10,7 +10,8 @@
     <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="/static/default/assets/images/favicon.ico">
-
+    <link href="/static/default/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet"
+          type="text/css"/>
     <!-- plugin css -->
     <link href="/static/default/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css"
           rel="stylesheet"
@@ -87,11 +88,6 @@
                            data-bs-target="#staticBackdrop">
                             Tạo lớp học
                         </a>
-                        <!-- item-->
-                        <a href="" class="dropdown-item notify-item language" data-lang="sp" data-bs-toggle="modal"
-                           data-bs-target="#thamGiaLop">
-                            Vào lớp học
-                        </a>
                     </div>
                 </div>
                 <div class="dropdown d-inline-block d-lg-none ms-2">
@@ -149,17 +145,17 @@
                 <!-- Left Menu Start -->
                 <ul class="metismenu list-unstyled" id="side-menu">
                     <li>
-                        <a href="index.html">
+                        <a href="/OnlineClass/home">
                             <i data-feather="home"></i>
                             <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
                             <span data-key="t-dashboard">Trang chủ</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/moi-tham-gia-lop">
+                        <a href="/OnlineClass/list-invitation">
                             <i data-feather="home"></i>
                             <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
-                            <span data-key="t-dashboard">Mời tham gia lớp</span>
+                            <span data-key="t-dashboard">Danh sách lời mời</span>
                         </a>
                     </li>
                 </ul>
@@ -199,6 +195,17 @@
 
 <script src="/static/default/assets/js/app.js"></script>
 
+<script src="/static/default/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- color picker js -->
+<script src="/static/default/assets/libs/@simonwep/pickr/pickr.min.js"></script>
+<script src="/static/default/assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+
+<!-- datepicker js -->
+<script src="/static/default/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+<!-- init js -->
+<script src="/static/default/assets/js/pages/form-advanced.init.js"></script>
 </body>
 
 </html>

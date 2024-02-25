@@ -115,7 +115,7 @@
                                                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
                                                      alt="avatar" width="60" height="60"/>
                                                 <div>
-                                                    <h6 class="fw-bold text-primary mb-1">[[ post.account
+                                                    <h6 class="fw-bold text-primary mb-1">[[ post.account_post.name
                                                         ]]</h6>
                                                     <p class="text-muted small mb-0">
                                                         [[ post.datePosted ]]
@@ -216,134 +216,127 @@
 
                                 </div>
                                 <!-- Thành viên -->
-                                {#                                <div class="tab-pane" id="thanhVien" role="tabpanel">#}
-                                {#                                    <div class="row">#}
-                                {#                                        <div class="mt-4 mb-4">#}
-                                {#                                            <h3>Chủ phòng</h3>#}
-                                {#                                            <hr>#}
-                                {#                                            <div class="d-flex flex-start align-items-center">#}
-                                {#                                                <img class="rounded-circle shadow-1-strong me-3"#}
-                                {#                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"#}
-                                {#                                                     alt="avatar" width="60" height="60"/>#}
-                                {#                                                <div>#}
-                                {#                                                    <h3 class="mb-1">[[ infor_class.account_class.name ]]</h3>#}
-                                {#                                                </div>#}
-                                {#                                            </div>#}
-                                {#                                        </div>#}
-                                {#                                        <div class="mt-4 mb-4">#}
-                                {#                                            <h3>Thành viên</h3>#}
-                                {#                                            <hr>#}
-                                {#                                            <div class="row">#}
-                                {#                                                <div class="col-lg-12">#}
-                                {#                                                    <div class="card">#}
-                                {#                                                        <div class="card-body">#}
-                                {#                                                            <div class="row align-items-center">#}
-                                {#                                                                <div class="col-md-6">#}
-                                {#                                                                    <div class="mb-3">#}
-                                {#                                                                        <h5 class="card-title">Danh sách thành#}
-                                {#                                                                            viên<span#}
-                                {#                                                                                    class="text-muted fw-normal ms-2">(834)</span>#}
-                                {#                                                                        </h5>#}
-                                {#                                                                    </div>#}
-                                {#                                                                </div>#}
-                                {##}
-                                {#                                                                <div class="col-md-6">#}
-                                {#                                                                    <div#}
-                                {#                                                                            class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">#}
-                                {#                                                                        <div>#}
-                                {#                                                                            <a data-lang="sp" data-bs-toggle="modal"#}
-                                {#                                                                               data-bs-target="#themThanhVien" href="#"#}
-                                {#                                                                               class="btn btn-light">#}
-                                {#                                                                                <i class="bx bx-plus me-1"></i>Thêm#}
-                                {#                                                                                thành viên</a>#}
-                                {#                                                                        </div>#}
-                                {#                                                                    </div>#}
-                                {##}
-                                {#                                                                </div>#}
-                                {#                                                            </div>#}
-                                {#                                                            <!-- end row -->#}
-                                {#                                                            <div class="table-responsive mb-4">#}
-                                {#                                                                <table#}
-                                {#                                                                        class="table align-middle datatable dt-responsive table-check nowrap"#}
-                                {#                                                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">#}
-                                {#                                                                    <thead>#}
-                                {#                                                                    <tr>#}
-                                {#                                                                        <th scope="col" style="width: 50px;">#}
-                                {#                                                                            <div#}
-                                {#                                                                                    class="form-check font-size-16">#}
-                                {#                                                                                <input type="checkbox"#}
-                                {#                                                                                       class="form-check-input"#}
-                                {#                                                                                       id="checkAll">#}
-                                {#                                                                                <label class="form-check-label"#}
-                                {#                                                                                       for="checkAll"></label>#}
-                                {#                                                                            </div>#}
-                                {#                                                                        </th>#}
-                                {#                                                                        <th scope="col">Tên</th>#}
-                                {#                                                                        <th scope="col">Email</th>#}
-                                {#                                                                        <th scope="col">Trạng thái</th>#}
-                                {#                                                                        <th scope="col">...</th>#}
-                                {##}
-                                {#                                                                    </tr>#}
-                                {#                                                                    </thead>#}
-                                {#                                                                    <tbody>#}
-                                {#                                                                    {% for a in listMember %}#}
-                                {#                                                                        <tr>#}
-                                {#                                                                            <th scope="row">#}
-                                {#                                                                                <div#}
-                                {#                                                                                        class="form-check font-size-16">#}
-                                {#                                                                                    <input type="checkbox"#}
-                                {#                                                                                           class="form-check-input"#}
-                                {#                                                                                           id="contacusercheck11">#}
-                                {#                                                                                    <label class="form-check-label"#}
-                                {#                                                                                           for="contacusercheck11"></label>#}
-                                {#                                                                                </div>#}
-                                {#                                                                            </th>#}
-                                {#                                                                            <td>#}
-                                {#                                                                                <img src="/static/default/assets/images/users/avatar-2.jpg"#}
-                                {#                                                                                     alt=""#}
-                                {#                                                                                     class="avatar-sm rounded-circle me-2">#}
-                                {#                                                                                <a href="#"#}
-                                {#                                                                                   class="text-body">[[ a.account_classMember.email ]]</a>#}
-                                {#                                                                            </td>#}
-                                {#                                                                            <td>#}
-                                {#                                                                                <a href="#"#}
-                                {#                                                                                   class="text-body">[[ a.account_classMember.name ]]</a>#}
-                                {#                                                                            </td>#}
-                                {#                                                                            <td>#}
-                                {#                                                                                {% if a.status == 1 %}#}
-                                {#                                                                                    <a href="#"#}
-                                {#                                                                                       class="text-body"#}
-                                {#                                                                                       style="color: red">Chưa#}
-                                {#                                                                                        tham gia</a>#}
-                                {#                                                                                {% endif %}#}
-                                {#                                                                                {% if a.status == 0 %}#}
-                                {#                                                                                    <a href="#"#}
-                                {#                                                                                       class="text-body"#}
-                                {#                                                                                       style="color: green">Đã tham#}
-                                {#                                                                                        gia</a>#}
-                                {#                                                                                {% endif %}#}
-                                {##}
-                                {#                                                                            </td>#}
-                                {#                                                                            <td>#}
-                                {#                                                                                <a href="#"#}
-                                {#                                                                                   class="text-body"#}
-                                {#                                                                                   style="color: green"#}
-                                {#                                                                                   ng-click="deleteClassMember([[ a.id ]])"><i#}
-                                {#                                                                                        class="bx bxs-trash-alt"></i></a>#}
-                                {#                                                                            </td>#}
-                                {#                                                                        </tr>#}
-                                {#                                                                    {% endfor %}#}
-                                {#                                                                    </tbody>#}
-                                {#                                                                </table>#}
-                                {#                                                            </div>#}
-                                {#                                                            <!-- end table responsive -->#}
-                                {#                                                        </div>#}
-                                {#                                                    </div>#}
-                                {#                                                </div>#}
-                                {#                                            </div>#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
+                                <div class="tab-pane" id="thanhVien" role="tabpanel">
+                                    <div class="row">
+                                        <div class="mt-4 mb-4">
+                                            <h3>Chủ phòng</h3>
+                                            <hr>
+                                            <div class="d-flex flex-start align-items-center">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                                     alt="avatar" width="60" height="60"/>
+                                                <div>
+                                                    {#                                                    <h3 class="mb-1">[[ infor_class.account_class.name ]]</h3>#}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 mb-4">
+                                            <h3>Thành viên</h3>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <h5 class="card-title">Danh sách thành
+                                                                            viên<span
+                                                                                    class="text-muted fw-normal ms-2">(834)</span>
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <div
+                                                                            class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                                                        <div>
+                                                                            <a data-lang="sp" data-bs-toggle="modal"
+                                                                               data-bs-target="#themThanhVien" href="#"
+                                                                               class="btn btn-light">
+                                                                                <i class="bx bx-plus me-1"></i>Thêm
+                                                                                thành viên</a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                            <div class="table-responsive mb-4">
+                                                                <table
+                                                                        class="table align-middle datatable dt-responsive table-check nowrap"
+                                                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th scope="col" style="width: 50px;">
+                                                                            <div
+                                                                                    class="form-check font-size-16">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="checkAll">
+                                                                                <label class="form-check-label"
+                                                                                       for="checkAll"></label>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th scope="col">Thông tin</th>
+                                                                        <th scope="col">Trạng thái</th>
+                                                                        <th scope="col">...</th>
+
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr ng-repeat=" i in memberInClass">
+                                                                        <th scope="row">
+                                                                            <div
+                                                                                    class="form-check font-size-16">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="contacusercheck11">
+                                                                                <label class="form-check-label"
+                                                                                       for="contacusercheck11"></label>
+                                                                            </div>
+                                                                        </th>
+                                                                        <td>
+                                                                            <img src="/static/default/assets/images/users/avatar-2.jpg"
+                                                                                 alt=""
+                                                                                 class="avatar-sm rounded-circle me-2">
+                                                                            <a href="#"
+                                                                               class="text-body">[[
+                                                                                i.account ]]</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#" ng-if="i.status == 1"
+                                                                               class="text-body"
+                                                                               style="color: red">Chưa
+                                                                                tham gia</a>
+
+                                                                            <a href="#" ng-if="i.status == 0"
+                                                                               class="text-body"
+                                                                               style="color: green">Đã tham
+                                                                                gia</a>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <button
+                                                                                    class="text-body"
+                                                                                    style="color: green"
+                                                                                    ng-click="deleteMember(i.id)">
+                                                                                <i
+                                                                                        class="bx bxs-trash-alt"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!-- end table responsive -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane" id="thongTinLop" role="tabpanel">
                                     <p class="mb-0">
                                         Etsy mixtape wayfarers, ethical wes anderson tofu before they
@@ -489,9 +482,9 @@
                             <select class="form-control" data-trigger name="choices-multiple-default"
                                     id="choices-multiple-default" placeholder="This is a placeholder" multiple
                                     ng-model="accounts">
-                                {% for a in list_account %}
-                                    <option value="[[ a.email ]]">
-                                        [[ a.name ]] ([[ a.email ]])
+                                {% for a in listAccount %}
+                                    <option value="{{ a.email }}">
+                                        {{ a.name }} ({{ a.email }})
                                     </option>
                                 {% endfor %}
                             </select>

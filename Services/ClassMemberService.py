@@ -30,15 +30,15 @@ def createMemberInClass():
         return jsonify({'message': str(e)})
 
 
-def confirmJoinClass():
+def confirmJoinClass(idCLassMember):
     try:
-        classMember = ClassMemberModel.query.filter_by(account=current_user.email, classOn=classOn).first()
+        classMember = ClassMemberModel.query.get(idCLassMember)
         classMember.status = 0
         db.session.commit()
-        return jsonify({'message': 'Join class seccessfully'})
+        return jsonify({'message': 'Join class seccessfully'}), 200
     except Exception as e:
         db.session.rollback()
-        return jsonify({'message': f'{str(e)}'})
+        return jsonify({'message': f'{str(e)}'}), 500
 
 
 def deleteMember(idClassMember):
@@ -50,3 +50,13 @@ def deleteMember(idClassMember):
     except Exception as e:
         db.session.commit()
         return jsonify({'message': f'{str(e)}'})
+
+
+def showMemberInClass(idClass):
+    members = ClassMemberModel.query.filter_by(classOn=idClass)
+    return jsonify(classesMemberSchema.dump(members))
+
+
+def listInvite():
+    listClass = ClassMemberModel.query.filter_by(account=current_user.email, status=1)
+    return classesMemberSchema.dump(listClass)

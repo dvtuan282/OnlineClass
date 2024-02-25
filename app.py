@@ -6,6 +6,7 @@ from Routes.AccountRoute import accountRoute
 from Routes.ClassRoute import classRoute
 from Routes.PostRoute import postRoute
 from Routes.CommentRoute import commentRoute
+from Routes.ClassMemberRoute import classMemberRoute
 
 from Routes.RouteTemplate.AccountRouteTemp import accountTemp_route
 from Routes.RouteTemplate.HomeRouterTemp import homeRouteTemp
@@ -37,6 +38,7 @@ app.register_blueprint(accountRoute)
 app.register_blueprint(classRoute)
 app.register_blueprint(postRoute)
 app.register_blueprint(commentRoute)
+app.register_blueprint(classMemberRoute)
 # register router temp
 app.register_blueprint(accountTemp_route)
 app.register_blueprint(homeRouteTemp)
