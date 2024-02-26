@@ -257,6 +257,14 @@
                                                                                 <i class="bx bx-plus me-1"></i>Thêm
                                                                                 thành viên</a>
                                                                         </div>
+                                                                        <div>
+                                                                            <a data-lang="sp" data-bs-toggle="modal"
+                                                                               data-bs-target="#themThanhVienFile"
+                                                                               href="#"
+                                                                               class="btn btn-light">
+                                                                                <i class="bx bx-plus me-1"></i>Thêm file
+                                                                                thành viên</a>
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>
@@ -495,6 +503,30 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
                         <button type="button" class="btn btn-primary" ng-click="addMember()">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#    upload file#}
+        <div class="modal fade" id="themThanhVienFile" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Thêm thành viên</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="width: 500px;">
+                        <form>
+                            <input type="file" id="fileInput"/>
+                            <button type="button" ng-click="uploadFile()">Upload File</button>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" ng-click="uploadFileListMember()">Thêm</button>
                     </div>
                 </div>
             </div>

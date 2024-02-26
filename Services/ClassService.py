@@ -21,8 +21,8 @@ def listClassOfAccount():
 def listOfClassInvolved():
     listClass = db.session.query(ClassModel).join(ClassMemberModel, ClassMemberModel.classOn == ClassModel.id). \
         join(AccountModel, AccountModel.email == ClassMemberModel.account). \
-        filter(and_(AccountModel.email == current_user.email, ClassMemberModel.status == 1)).all()
-    return listClass
+        filter(and_(AccountModel.email == current_user.email, ClassMemberModel.status == 0)).all()
+    return classesSchema.dump(listClass)
 
 
 def createClass():

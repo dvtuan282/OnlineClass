@@ -1,6 +1,7 @@
+import unicodedata
 from flask import request, jsonify
 from flask_login import current_user
-
+import pandas as pd
 from Models.ClassMemberModel import classesMemberSchema, classMemberSchema, ClassMemberModel
 from Models.ClassModel import ClassModel
 from Utilities.Config import db
@@ -55,6 +56,35 @@ def deleteMember(idClassMember):
 def showMemberInClass(idClass):
     members = ClassMemberModel.query.filter_by(classOn=idClass)
     return jsonify(classesMemberSchema.dump(members))
+
+
+def createMembersInClass(classOn):
+    try:
+        # kiểm tra file có được gửi lên không
+        if 'file' not in request.files:
+            return jsonify({'message': 'No file part'}), 400
+        file = request.files['file']
+        if file.filename == '' and file.filename.endswith('.xlsx'):
+            return jsonify({"message": "No selected file"}), 400
+        df = pd.read_excel(file)
+        # Chuẩn hóa dataframe bị lỗi utf8
+        df['Email'] = df['Email'].apply(
+            lambda x: unicodedata.normalize('NFD', str(x)).encode('ascii', 'ignore').decode('utf-8'))
+
+        classOnModel = ClassModel.query.get(classOn)
+        adminClass = AccountModel.query.get(current_user.email)
+        for email in df['Email']:
+            classMember = ClassMemberModel()
+            classMember.classOn = classOn
+            classMember.account = email
+            classMember.status = 1
+            db.session.add(classMember)
+            db.session.commit()
+            sendEmailTemplate(email, 'MỜI THAM GIA LỚP HỌC', '/default/mail/moiThamGia.html', accountClass=adminClass,
+                              classOn=classOnModel, email=email)
+        return jsonify({'data': 'oke'}), 200
+    except Exception as e:
+        return jsonify({'message': f'{str(e)}'}), 500
 
 
 def listInvite():

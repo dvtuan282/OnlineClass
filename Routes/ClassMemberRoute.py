@@ -27,3 +27,8 @@ def deleteMemberInClass(idClassMember):
 @classMemberRoute.route('/OnlineClass/listInvitation', methods=['GET'])
 def listInvitation():
     return classMemberService.listInvite()
+
+
+@classMemberRoute.route('/OnlineClass/create-members/<idClass>', methods=['POST'])
+def createMembers(idClass):
+    return classMemberService.createMembersInClass(idClass)

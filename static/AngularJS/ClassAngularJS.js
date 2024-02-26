@@ -114,6 +114,29 @@ app.controller("class-ctrl", function ($scope, $http, $window) {
             alert('Thành công');
         })
     };
+    // upload file list member add class
+    $scope.uploadFile = function () {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+
+        if (file) {
+            var formData = new FormData();
+            formData.append('file', file);
+
+            $http.post('http://127.0.0.1:5000/OnlineClass/create-members/' + $scope.idClass, formData, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (response) {
+                alert('Thành công');
+                $scope.listMember()
+                fileInput = ''
+            }, function (error) {
+                console.error('Error uploading file:', error);
+            });
+        } else {
+            console.error('No file selected.');
+        }
+    };
     // =========== Lời mời tham gia ===========//
     $scope.showListInvitation = function () {
         $http.get('http://127.0.0.1:5000/OnlineClass/listInvitation').then(r => {

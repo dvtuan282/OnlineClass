@@ -12,7 +12,7 @@ app.controller("account-ctrl", function ($scope, $http, $window) {
         }
         $http.post("http://127.0.0.1:5000/OnlineClass/register-account", data).then(r => {
             alert("Thêm thành công")
-            $window.location.href = 'http://127.0.0.1:5000/onlineClass/login';
+            $window.location.href = 'http://127.0.0.1:5000/OnlineClass/login';
         })
     }
 
