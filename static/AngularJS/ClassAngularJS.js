@@ -3,10 +3,19 @@ app.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 });
-app.controller("class-ctrl", function ($scope, $http, $window) {
+app.controller("class-ctrl", function ($scope, $http, $window, $filter) {
     $scope.dc = 'dddd';
     const pathName = location.pathname;
     $scope.idClass = pathName.substring(pathName.lastIndexOf("/") + 1)
+    // class for account
+    $scope.a = function () {
+        $http.get("http://127.0.0.1:5000/OnlineClass/list-class-of-account").then(resp => {
+            console.log(resp.data)
+            $scope.lisClassOfAccount = resp.data;
+        }).catch(error => {
+            console.log(error)
+        })
+    }
     // information class
     $http.get("http://127.0.0.1:5000/OnlineClass/informationClass/" + $scope.idClass).then(resp => {
         $scope.inforClass = resp.data;
@@ -150,5 +159,41 @@ app.controller("class-ctrl", function ($scope, $http, $window) {
             $scope.showListInvitation()
         })
     }
-//
+// ========Quizz======//
+    $scope.showQuizz = function () {
+        $http.get('http://127.0.0.1:5000/OnlineClass/quizz-class/' + $scope.idClass).then(r => {
+            $scope.listQuizz = r.data
+        })
+    }
+    $scope.showQuizz()
+    $scope.toDate = function (data) {
+        // Parse the input string into a JavaScript Date object
+        const myDate = new Date(data);
+
+        // Use AngularJS date filter to format the date
+        return $filter('date')(myDate, 'yyyy-MM-ddTHH:mm:ss');
+    };
+    $scope.classOnQuizz = []
+
+    $scope.createQuizz = function () {
+        const formData = new FormData()
+        var fileInput = document.getElementById('fileCauHoi');
+        var file = fileInput.files[0];
+        formData.append('title', $scope.titleQuizz);
+        formData.append('openTime', $scope.toDate($scope.ngayBatDau));
+        formData.append('closedTime', $scope.toDate($scope.ngayHetHan));
+        formData.append('testTime', $scope.thoiGianLamBai);
+        formData.append('image', $scope.imageQuizz);
+        formData.append('listClassShare', $scope.classOnQuizz);
+        formData.append("fileQuestion", file)
+        $http.post('http://127.0.0.1:5000/test/' + $scope.idClass, formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(r => {
+            alert("Thành công")
+            $scope.showQuizz()
+        })
+    }
+
+
 })

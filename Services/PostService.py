@@ -37,10 +37,6 @@ def listPostInClass(idClass):
     posts = PostModel.query.filter_by(classOn=idClass).order_by(desc(PostModel.datePosted)).all()
     return jsonify(postsSchema.dump(posts))
 
-def informationPost(idPost):
-    post = PostModel.query.get(idPost)
-    return jsonify(postSchema.dump(post))
-
 
 def editPost(idPost):
     data = request.json

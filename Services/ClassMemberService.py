@@ -8,7 +8,6 @@ from Utilities.Config import db
 from Models.AccountModel import AccountModel
 from Utilities.Email import sendEmailTemplate
 
-
 def createMemberInClass():
     data = request.json
     classOn = data['classOn']

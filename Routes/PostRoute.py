@@ -14,11 +14,6 @@ def listPostInClass(idClass):
     return postService.listPostInClass(idClass)
 
 
-@postRoute.route('/OnlineClass/list-post-in-class1/<idClass>', methods=['GET'])
-def listPostInClass1(idClass):
-    return postService.listPostInClass1(idClass)
-
-
 @postRoute.route('/OnlineClass/update-post/<idClass>', methods=['PUT'])
 def editPost(idClass):
     return postService.editPost(idClass)

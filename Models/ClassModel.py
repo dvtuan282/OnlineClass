@@ -3,6 +3,7 @@ from marshmallow import post_load
 from Utilities.Config import db, ma
 from Models.PostModel import PostModel
 from Models.ClassMemberModel import ClassMemberModel
+from Models.quizzClassModel import QuizzClassModel
 
 
 class ClassModel(db.Model):
@@ -17,6 +18,7 @@ class ClassModel(db.Model):
     background = db.Column(db.String(45))
     post = db.relationship('PostModel', backref='class_post', lazy=True)
     classMember = db.relationship('ClassMemberModel', backref='class_classMember', lazy=True)
+    quizzClass = db.relationship('QuizzClassModel', backref='class_quizzClass', lazy=True)
 
 
 class ClassSchema(ma.Schema):

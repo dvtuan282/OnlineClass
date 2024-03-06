@@ -18,6 +18,12 @@ def listClassOfAccount():
     return jsonify(classesSchema.dump(classOn))
 
 
+def listClassOfAccountObject():
+    account = AccountModel.query.get(current_user.email)
+    classOn = [cl for cl in account.classOn]
+    return classOn
+
+
 def listOfClassInvolved():
     listClass = db.session.query(ClassModel).join(ClassMemberModel, ClassMemberModel.classOn == ClassModel.id). \
         join(AccountModel, AccountModel.email == ClassMemberModel.account). \

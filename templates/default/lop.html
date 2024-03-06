@@ -213,7 +213,35 @@
                                 </div>
                                 <!-- bài tập -->
                                 <div class="tab-pane" id="baiTap" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                                <div>
+                                                    <a data-bs-toggle="modal" data-bs-target="#taoBaiKiemTra"
+                                                       class="btn btn-primary">
+                                                        <i class="bx bx-plus me-1"></i>Tạo bài kiểm tra</a>
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                        <div class="col-xl-3 col-md-6" ng-repeat="i in listQuizz">
+                                            <div class="card card-h-400"
+                                                 style="background-image: url('/static/default/assets/images/bg-1.jpg'); background-size: cover; background-position: center;">
+                                                <div class="card-body">
+                                                    <h1 class="card-title" style="color: white">[[ i.title]]</h1>
+                                                    <p class="card-text">
+                                                        <a href="#" style="color: white; "></a>
+                                                    </p>
+                                                    <button type="button"
+                                                            class="btn btn-primary waves-effect waves-light"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModalFullscreen"
+                                                            ng-disabled="i.status == 1">Làm bài
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Thành viên -->
                                 <div class="tab-pane" id="thanhVien" role="tabpanel">
@@ -246,7 +274,6 @@
                                                                         </h5>
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="col-md-6">
                                                                     <div
                                                                             class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
@@ -345,6 +372,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--Thông tin lớp-->
                                 <div class="tab-pane" id="thongTinLop" role="tabpanel">
                                     <p class="mb-0">
                                         Etsy mixtape wayfarers, ethical wes anderson tofu before they
@@ -389,7 +417,7 @@
 
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
-        <!-- ====Modal=== -->
+        <!-- =======================================Modal======================================= -->
         <!-- chỉnh sửa bài viết -->
         <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog"
              aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -530,6 +558,164 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- Bài kiểm tra -->
+        <div id="exampleModalFullscreen" class="modal fade" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFullscreenLabel">Fullscreen Modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Overflowing text to show scroll behavior</h5>
+                        <p>Cras mattis consectetur purus sit amet fermentum.
+                            Cras justo odio, dapibus ac facilisis in,
+                            egestas eget quam. Morbi leo risus, porta ac
+                            consectetur ac, vestibulum at eros.</p>
+                        <p>Praesent commodo cursus magna, vel scelerisque
+                            nisl consectetur et. Vivamus sagittis lacus vel
+                            augue laoreet rutrum faucibus dolor auctor.</p>
+                        <p>Aenean lacinia bibendum nulla sed consectetur.
+                            Praesent commodo cursus magna, vel scelerisque
+                            nisl consectetur et. Donec sed odio dui. Donec
+                            ullamcorper nulla non metus auctor
+                            fringilla.</p>
+                        <p>Cras mattis consectetur purus sit amet fermentum.
+                            Cras justo odio, dapibus ac facilisis in,
+                            egestas eget quam. Morbi leo risus, porta ac
+                            consectetur ac, vestibulum at eros.</p>
+                        <p>Praesent commodo cursus magna, vel scelerisque
+                            nisl consectetur et. Vivamus sagittis lacus vel
+                            augue laoreet rutrum faucibus dolor auctor.</p>
+                        <p>Aenean lacinia bibendum nulla sed consectetur.
+                            Praesent commodo cursus magna, vel scelerisque
+                            nisl consectetur et. Donec sed odio dui. Donec
+                            ullamcorper nulla non metus auctor
+                            fringilla.</p>
+                        <p>Cras mattis consectetur purus sit amet fermentum.
+                            Cras justo odio, dapibus ac facilisis in,
+                            egestas eget quam. Morbi leo risus, porta ac
+                            consectetur ac, vestibulum at eros.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close
+                        </button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- Tạo bài kiểm tra -->
+        <div class="modal fade bs-example-modal-xl" id="taoBaiKiemTra" tabindex="-1" role="dialog"
+             aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <img class="rounded me-2" alt="200x200" width="200"
+                                     src="/static/default/assets/images/small/img-4.jpg"
+                                     data-holder-rendered="true">
+                                <input type="radio" name="" value="a" id="imagebackgroud" ng-model="imageQuizz">>
+
+                            </div>
+                            <div class="col-lg-3">
+                                <img class="rounded me-2" alt="200x200" width="200"
+                                     src="/static/default/assets/images/small/img-4.jpg"
+                                     data-holder-rendered="true">
+                                <input type="radio" name="" value="b" id="imagebackgroud" ng-model="imageQuizz">
+
+                            </div>
+                            <div class="col-lg-3">
+                                <img class="rounded me-2" alt="200x200" width="200"
+                                     src="/static/default/assets/images/small/img-4.jpg"
+                                     data-holder-rendered="true">
+                                <input type="radio" name="" value="c" id="imagebackgroud" ng-model="imageQuizz">>
+
+                            </div>
+                            <div class="col-lg-3">
+                                <img class="rounded me-2" alt="200x200" width="200"
+                                     src="/static/default/assets/images/small/img-4.jpg"
+                                     data-holder-rendered="true">
+                                <input type="radio" name="" value="d" id="imagebackgroud" ng-model="imageQuizz">>
+
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label for="example-text-input"
+                                           class="form-label">Title</label>
+                                    <input class="form-control" type="text"
+                                           ng-model="titleQuizz" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Ngày bắt
+                                        đầu</label>
+                                    <input class="form-control" type="datetime-local"
+                                           ng-model="ngayBatDau" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Ngày hết
+                                        hạn</label>
+                                    <input class="form-control" type="datetime-local"
+                                           ng-model="ngayHetHan" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Thời gian
+                                        làm bài</label>
+                                    <input class="form-control" type="number"
+                                           ng-model="thoiGianLamBai" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label for="example-text-input"
+                                           class="form-label">Tạo cho nhiều lớp</label>
+                                    <select class="form-control" data-trigger name="choices-multiple-default"
+                                            id="choices-multiple-default" placeholder="This is a placeholder" multiple
+                                            ng-model="classOnQuizz">
+                                        {% for a in listClass %}
+                                            <option value="{{ a.id }}">
+                                                {{ a.className }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Câu
+                                        hỏi</label>
+                                    <input class="form-control" type="file"
+                                           value="Artisanal kale" id="fileCauHoi" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="createQuizz()">Thêm</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div>
     </div>
 {% endblock %}

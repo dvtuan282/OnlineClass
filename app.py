@@ -1,3 +1,6 @@
+import codecs
+import sys
+
 from flask import Flask, render_template
 from flask_cors import CORS
 from flask_mail import Mail
@@ -7,13 +10,15 @@ from Routes.ClassRoute import classRoute
 from Routes.PostRoute import postRoute
 from Routes.CommentRoute import commentRoute
 from Routes.ClassMemberRoute import classMemberRoute
+from Routes.QuizzRoute import quizzRoute
 
 from Routes.RouteTemplate.AccountRouteTemp import accountTemp_route
 from Routes.RouteTemplate.HomeRouterTemp import homeRouteTemp
 from Utilities.Config import login_manager, ConfigDatabase, ma, db
 
 app = Flask(__name__)
-
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
 # Config login
 login_manager.init_app(app)
 login_manager.login_view = 'accountRouter.login_account'
@@ -39,6 +44,7 @@ app.register_blueprint(classRoute)
 app.register_blueprint(postRoute)
 app.register_blueprint(commentRoute)
 app.register_blueprint(classMemberRoute)
+app.register_blueprint(quizzRoute)
 # register router temp
 app.register_blueprint(accountTemp_route)
 app.register_blueprint(homeRouteTemp)

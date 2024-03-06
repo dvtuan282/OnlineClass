@@ -31,7 +31,7 @@ app.controller("account-ctrl", function ($scope, $http, $window) {
         }
         $http.post("http://127.0.0.1:5000/OnlineClass/login", account).then(r => {
             $scope.districts = r.data;
-            $window.location.href = 'http://127.0.0.1:5000/onlineClass/home';
+            $window.location.href = 'http://127.0.0.1:5000/OnlineClass/home';
             alert("Đăng nhập thành công")
         })
     }

@@ -6,7 +6,6 @@ app.config(function ($interpolateProvider) {
 
 app.controller("home-ctrl", function ($scope, $http, $window) {
     $scope.a = function () {
-
         $http.get("http://127.0.0.1:5000/OnlineClass/list-class-of-account").then(resp => {
             console.log(resp.data)
             $scope.lisClassOfAccount = resp.data;
