@@ -4,7 +4,7 @@ import pandas as pd
 from flask import jsonify, request
 from sqlalchemy.dialects.mysql import json
 from Models.AnswerModel import AnswerModel
-from Models.QuestionModel import QuestionModel
+from Models.QuestionModel import QuestionModel, questionsSchema
 from Models.QuizzModel import QuizzModel, quizzSchema, quizzesSchema
 from Models.quizzClassModel import QuizzClassModel
 from Utilities.Config import db
@@ -96,8 +96,14 @@ def sendMailMember(idClass, idQuizz):
     return jsonify({'mess': 'oke'})
 
 
-def autoUpdateStatus():
-    pass
+def informationQuizz(idQuizz):
+    quizz = QuizzModel.query.get(idQuizz)
+    return quizzSchema.dump(quizz)
+
+
+def showQuestionAndAnswer(idQuizz):
+    question = QuestionModel.query.filter_by(quizz=idQuizz)
+    return questionsSchema.dump(question)
 
 
 def creatQuestionAndAnswerFile(file_path, quizz):

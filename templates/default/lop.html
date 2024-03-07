@@ -2,6 +2,47 @@
 {% block title %} Online class | Lớp {% endblock %}
 <!-- ============================Content================================== -->
 {% block content %}
+    <style>
+        #timer {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            line-height: 54px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .aa {
+            color: #0c7a87;
+        }
+
+        .circleI {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #3498db;
+            text-align: center;
+            line-height: 54px;
+            font-weight: bold;
+            font-size: 25px;
+            border: 1px solid #3498db;
+        }
+    </style>
     <div class="main-content" ng-app="class-app" ng-controller="class-ctrl">
         <div class="page-content">
             <div class="container-fluid">
@@ -232,11 +273,10 @@
                                                     <p class="card-text">
                                                         <a href="#" style="color: white; "></a>
                                                     </p>
-                                                    <button type="button"
-                                                            class="btn btn-primary waves-effect waves-light"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalFullscreen"
-                                                            ng-disabled="i.status == 1">Làm bài
+                                                    <button type="button"  class="btn btn-primary btn-sm"
+                                                            data-bs-toggle="modal" data-bs-target="#thongTinQuizz"
+                                                            ng-disabled="i.status == 1" ng-click="thongTinQuizz(i.id)">
+                                                        Làm bài
                                                     </button>
                                                 </div>
                                             </div>
@@ -559,7 +599,7 @@
                 </div>
             </div>
         </div>
-        <!-- Bài kiểm tra -->
+        <!-- question quizz -->
         <div id="exampleModalFullscreen" class="modal fade" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -569,35 +609,46 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h5>Overflowing text to show scroll behavior</h5>
-                        <p>Cras mattis consectetur purus sit amet fermentum.
-                            Cras justo odio, dapibus ac facilisis in,
-                            egestas eget quam. Morbi leo risus, porta ac
-                            consectetur ac, vestibulum at eros.</p>
-                        <p>Praesent commodo cursus magna, vel scelerisque
-                            nisl consectetur et. Vivamus sagittis lacus vel
-                            augue laoreet rutrum faucibus dolor auctor.</p>
-                        <p>Aenean lacinia bibendum nulla sed consectetur.
-                            Praesent commodo cursus magna, vel scelerisque
-                            nisl consectetur et. Donec sed odio dui. Donec
-                            ullamcorper nulla non metus auctor
-                            fringilla.</p>
-                        <p>Cras mattis consectetur purus sit amet fermentum.
-                            Cras justo odio, dapibus ac facilisis in,
-                            egestas eget quam. Morbi leo risus, porta ac
-                            consectetur ac, vestibulum at eros.</p>
-                        <p>Praesent commodo cursus magna, vel scelerisque
-                            nisl consectetur et. Vivamus sagittis lacus vel
-                            augue laoreet rutrum faucibus dolor auctor.</p>
-                        <p>Aenean lacinia bibendum nulla sed consectetur.
-                            Praesent commodo cursus magna, vel scelerisque
-                            nisl consectetur et. Donec sed odio dui. Donec
-                            ullamcorper nulla non metus auctor
-                            fringilla.</p>
-                        <p>Cras mattis consectetur purus sit amet fermentum.
-                            Cras justo odio, dapibus ac facilisis in,
-                            egestas eget quam. Morbi leo risus, porta ac
-                            consectetur ac, vestibulum at eros.</p>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-6" ng-repeat="i in listQuestion">
+                                        <h6>Câu hỏi [[$index + 1]] : [[i.title]]</h6>
+                                        <p ng-repeat="answer in i.answer">
+                                            <input ng-click="clickRadioAnswer(answer.question)"
+                                                   name="[[answer.question]]" type="radio"> [[answer.title]]
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4" style="border-left: 2px solid black">
+                                <div id="stopWatch">
+                                    <div id="timer">[[ formattedTime ]]</div>
+                                </div>
+                                <div class="row" id="">
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-2" ng-repeat="i in listQuestion">
+                                                <div ng-class="{'circle': isRadioSelected([[i.id]]) == true, 'circleI': isRadioSelected([[i.id]]) == false}">
+                                                    [[$index + 1]]
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 justify-content-end">
+                                        <div style="margin-right: 20px">
+                                            <div style="margin-right: 20px" class="circle"></div>
+                                            Đã làm
+                                            <div class="circleI"></div>
+                                            Chưa làm
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close
@@ -706,7 +757,7 @@
                                     <label for="example-text-input" class="form-label">Câu
                                         hỏi</label>
                                     <input class="form-control" type="file"
-                                           value="Artisanal kale" id="fileCauHoi" >
+                                           value="Artisanal kale" id="fileCauHoi">
                                 </div>
                             </div>
                         </div>
@@ -716,6 +767,31 @@
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
+        </div>
+        <!-- information -->
+        <div class="modal fade bs-example-modal-center" id="thongTinQuizz" tabindex="-1" role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông tin bài kiểm tra</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>[[infQuizz.title]]</h3>
+                        <h5>Thời gian làm bài: [[ infQuizz.testTime ]] P</h5>
+                        <p>Bạn đã sẵn sàng kiểm tra</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalFullscreen"
+                                ng-click="showQuestionInQuizz(infQuizz.id,infQuizz.testTime)">Xác
+                            nhận
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

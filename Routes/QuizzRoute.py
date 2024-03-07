@@ -19,13 +19,17 @@ def listQuizInClass(idClass):
     return quizzService.listQuizzInClass(idClass)
 
 
-@quizzRoute.route('/OnlineClass/quizz-test/<idClass>', methods=['POST'])
-def test(idClass):
-    data = request.json
-    return quizzService.sendMailMember(idClass, data['idQuizz'])
+@quizzRoute.route('/OnlineClass/quizz/<idQuizz>', methods=['GET'])
+def informationQuizz(idQuizz):
+    return quizzService.informationQuizz(idQuizz)
 
 
-@quizzRoute.route('/test/<idQuizz>', methods=['POST'])
-def test1(idQuizz):
+@quizzRoute.route('/OnlineClass/quizz/<idQuizz>', methods=['POST'])
+def createQuizz(idQuizz):
     # data = request.files['a']
     return quizzService.createQuizz(idQuizz)
+
+
+@quizzRoute.route('/OnlineClass/quizz-question/<idQuizz>', methods=['GET'])
+def showQuestion(idQuizz):
+    return quizzService.showQuestionAndAnswer(idQuizz)

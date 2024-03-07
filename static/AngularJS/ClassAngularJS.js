@@ -3,7 +3,7 @@ app.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 });
-app.controller("class-ctrl", function ($scope, $http, $window, $filter) {
+app.controller("class-ctrl", function ($scope, $http, $window, $filter, $interval) {
     $scope.dc = 'dddd';
     const pathName = location.pathname;
     $scope.idClass = pathName.substring(pathName.lastIndexOf("/") + 1)
@@ -173,6 +173,8 @@ app.controller("class-ctrl", function ($scope, $http, $window, $filter) {
         // Use AngularJS date filter to format the date
         return $filter('date')(myDate, 'yyyy-MM-ddTHH:mm:ss');
     };
+
+    // create quizz
     $scope.classOnQuizz = []
 
     $scope.createQuizz = function () {
@@ -186,7 +188,7 @@ app.controller("class-ctrl", function ($scope, $http, $window, $filter) {
         formData.append('image', $scope.imageQuizz);
         formData.append('listClassShare', $scope.classOnQuizz);
         formData.append("fileQuestion", file)
-        $http.post('http://127.0.0.1:5000/test/' + $scope.idClass, formData, {
+        $http.post('http://127.0.0.1:5000/OnlineClass/quizz/' + $scope.idClass, formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(r => {
@@ -195,5 +197,64 @@ app.controller("class-ctrl", function ($scope, $http, $window, $filter) {
         })
     }
 
+//     Show infor quizz
+    $scope.thongTinQuizz = function (idQuizz) {
+        $http.get('http://127.0.0.1:5000/OnlineClass/quizz/' + idQuizz).then(r => {
+            $scope.infQuizz = r.data
+        })
+    }
+    //     đồng hồ bấm giờ
+    $scope.formattedTime = "00:00:00";
+    $scope.timerInterval = null;
+    $scope.startCountdown = function (durationInSeconds) {
+        const startTime = new Date().getTime();
+        const endTime = startTime + durationInSeconds * 60 * 1000;
 
-})
+        function updateTimer() {
+            const currentTime = new Date().getTime();
+            const remainingTime = endTime - currentTime;
+
+            if (remainingTime >= 0) {
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                $scope.formattedTime = formatTime(hours) + ":" + formatTime(minutes) + ":" + formatTime(seconds);
+            } else {
+                $scope.formattedTime = "00:00:00";
+                $interval.cancel($scope.timerInterval);
+            }
+        }
+
+        function formatTime(value) {
+            return value < 10 ? "0" + value : value;
+        }
+
+        updateTimer(); // Initial call to set the timer immediately
+
+        $scope.timerInterval = $interval(updateTimer, 1000); // Update every second
+
+    };
+//     show question In quizz
+    $scope.showQuestionInQuizz = function (idQuizz, timeTest) {
+        $http.get('http://127.0.0.1:5000/OnlineClass/quizz-question/' + idQuizz).then(r => {
+            $scope.listQuestion = r.data
+            $scope.startCountdown(45)
+        })
+    }
+    // hàm lấy vào radio name khi click vào radio
+    $scope.clickRadioAnswer = function (radioGroupName) {
+        return radioGroupName;
+    }
+    // hàm kiểm tra radio đã chọn hay chưa
+    $scope.isRadioSelected = function (radioGroupName) {
+        const radios = document.getElementsByName(radioGroupName);
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+});

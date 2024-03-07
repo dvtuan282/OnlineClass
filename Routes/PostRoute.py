@@ -24,10 +24,10 @@ def deletePost(idClass):
     return postService.deletePost(idClass)
 
 
-@postRoute.route('/OnlineClass/information-post/<idPost>', methods=['GET'])
-def informationPost(idPost):
-    return postService.informationPost(idPost)
+# @postRoute.route('/OnlineClass/information-post/<idPost>', methods=['GET'])
+# def informationPost(idPost):
+#     return postService.informationPost(idPost)
 
-@postRoute.route('/test/<idPost>', methods=['GET'])
-def test(idPost):
-        return postService.test(idPost)
+# @postRoute.route('/test/<idPost>', methods=['GET'])
+# def test(idPost):
+#         return postService.test(idPost)
