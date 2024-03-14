@@ -273,7 +273,7 @@
                                                     <p class="card-text">
                                                         <a href="#" style="color: white; "></a>
                                                     </p>
-                                                    <button type="button"  class="btn btn-primary btn-sm"
+                                                    <button type="button" class="btn btn-primary btn-sm"
                                                             data-bs-toggle="modal" data-bs-target="#thongTinQuizz"
                                                             ng-disabled="i.status == 1" ng-click="thongTinQuizz(i.id)">
                                                         Làm bài
@@ -606,7 +606,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalFullscreenLabel">Fullscreen Modal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -616,7 +615,10 @@
                                         <h6>Câu hỏi [[$index + 1]] : [[i.title]]</h6>
                                         <p ng-repeat="answer in i.answer">
                                             <input ng-click="clickRadioAnswer(answer.question)"
-                                                   name="[[answer.question]]" type="radio"> [[answer.title]]
+                                                   name="[[answer.question]]"
+                                                   ng-model="selectResults[answer.question]"
+                                                   value="[[answer.id]]" ng-change="sendDataToAPI()"
+                                                   type="radio"> [[answer.title]]
                                         </p>
                                     </div>
                                 </div>
@@ -651,9 +653,43 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close
+                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                                ng-click="createResults()" data-bs-toggle="modal"
+                                data-bs-target="#results">Kết thúc
                         </button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="results" tabindex="-1"
+             role="dialog" aria-labelledby="exampleModalLongScrollableTitle"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalLongScrollableTitle">
+                            Results quizz </h5>
+                        <button type="button" class="btn-close"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-6" ng-repeat="i in listResults">
+                            <h6>Câu hỏi [[$index + 1]] : [[i.question_details.title]]</h6>
+                            <p>
+                                [[i.answer_details.title]]
+                            </p>
+                        </div>
+                        <hr>
+                        <h6>Tổng điểm: 8/10 - thời gian: 30p</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light"
+                                data-bs-dismiss="modal">Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Save
+                            changes
+                        </button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

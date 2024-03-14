@@ -1,8 +1,8 @@
-from flask import jsonify, request, session
+from flask import jsonify, request, session, url_for, redirect
 from Models.AccountModel import AccountModel, accountSchema, accountsSchema
 from Utilities.RamdomCode import ramdomCode
 from flask_login import login_user, current_user
-from Utilities.Config import db
+from Utilities.Config import db, oauth
 from Utilities.Email import sendEmailText
 
 
@@ -77,3 +77,30 @@ def listAccount():
 
 def inforAccount():
     return current_user
+
+
+def authorize():
+    token = oauth.google.authorize_access_token()
+    resp = oauth.google.get('userinfo')
+    resp.raise_for_status()
+    profile = resp.json()
+    account = AccountModel.query.get(profile['email'])
+    if not account:
+        accountAdd = AccountModel()
+        accountAdd.email = profile['email']
+        accountAdd.password = ramdomCode()
+        accountAdd.name = profile['name']
+        accountAdd.avatar = profile['picture']
+        db.session.add(accountAdd)
+        db.session.commit()
+        login_user(accountAdd)
+    else:
+        login_user(account)
+    return redirect('http://127.0.0.1:5000/OnlineClass/home')
+
+
+def googleLogin():
+    google = oauth.create_client('google')
+    # Sử dụng callback URL chính xác đã được đăng ký với Google OAuth
+    redirect_uri = url_for('accountTemp_route.authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)

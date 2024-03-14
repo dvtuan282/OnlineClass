@@ -1,7 +1,9 @@
 from flask_login import LoginManager
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
+from authlib.integrations.flask_client import OAuth
 
+oauth = OAuth()
 db = SQLAlchemy()
 ma = Marshmallow()
 login_manager = LoginManager()

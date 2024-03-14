@@ -1,49 +1,35 @@
-import pandas as pd
+from pprint import pprint
+from datetime import datetime
+from marshmallow import Schema, fields
 
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.created_at = datetime.utcnow()
 
-class CauHoi:
-    def __init__(self, id, title):
-        self.id = id
+class UserSchema(Schema):
+    name = fields.Str()
+    email = fields.Email()
+    created_at = fields.DateTime()
+
+class Blog:
+    def __init__(self, title, author):
         self.title = title
+        self.author = author
 
-    def show(self):
-        print(f"ID: {self.id}")
-        print(f"Title: {self.title}")
-        print()
+class BlogSchema(Schema):
+    title = fields.Str()
+    author = fields.Nested(UserSchema)
 
+# Creating a User instance
+user = User(name="Monty", email="monty@python.org")
 
-class CauTraLoi:
-    def __init__(self, id, title, is_croo):
-        self.id = id
-        self.title = title
-        self.is_croo = is_croo
+# Creating a Blog instance with the User instance as the author
+blog = Blog(title="Something Completely Different", author=user)
 
-    def show(self):
-        print(f"ID: {self.id}")
-        print(f"Title: {self.title}")
-        print(f"Is Croo: {self.is_croo}")
-        print()
+# Serializing the Blog instance using BlogSchema
+result = BlogSchema().dump(blog)
 
-
-df = pd.read_excel("C:\\Users\dvtua\Downloads\đềđề.xlsx")
-lsTL = []
-lsH = []
-idH = 0
-idT = 0
-for index, row in df.iterrows():
-    idH += 1
-    cauHoi = CauHoi(id=idH, title=row["Câu hỏi"])
-    lsH.append(cauHoi)
-    for columnName, value in row.items():
-        if columnName.startswicolth("Đáp án"):
-            is_croo = 1 if columnName == "Đáp án đúng" else 0
-            idT += 1
-            cauTraLoi = CauTraLoi(id=idT, title=value, is_croo=is_croo)
-            lsTL.append(cauTraLoi)
-
-
-# for h in lsH:
-#     print(h.show())
-
-for j in lsTL:
-    print(j.show())
+# Pretty-printing the serialized result
+pprint(result)

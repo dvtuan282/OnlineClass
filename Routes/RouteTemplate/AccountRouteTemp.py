@@ -1,6 +1,9 @@
-from flask import Flask, render_template, redirect, Blueprint
+import json
+
+from flask import Flask, render_template, redirect, Blueprint, url_for
 from flask_login import login_required, logout_user, current_user
-from Services.AccountService import inforAccount
+from Utilities.Config import oauth
+import Services.AccountService as accountService
 
 accountTemp_route = Blueprint('accountTemp_route', __name__)
 
@@ -13,6 +16,16 @@ def dang_nhap():
 @accountTemp_route.route('/OnlineClass/register-account', methods=['GET'])
 def dang_ky():
     return render_template('/default/dangKy.html')
+
+
+@accountTemp_route.route('/OnlineClass/login-google')
+def googleLogin():
+    return accountService.googleLogin()
+
+
+@accountTemp_route.route('/OnlineClass/callback')
+def authorize():
+    return accountService.authorize()
 
 
 @accountTemp_route.route('/thong-tin', methods=['GET'])

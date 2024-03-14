@@ -230,21 +230,29 @@ app.controller("class-ctrl", function ($scope, $http, $window, $filter, $interva
             return value < 10 ? "0" + value : value;
         }
 
-        updateTimer(); // Initial call to set the timer immediately
+        updateTimer();
 
         $scope.timerInterval = $interval(updateTimer, 1000); // Update every second
 
     };
+//     stop time
+    $scope.stopTimer = function () {
+        $interval.cancel($scope.timerInterval);
+    }
 //     show question In quizz
+    $scope.idQuizz = ''
+
     $scope.showQuestionInQuizz = function (idQuizz, timeTest) {
         $http.get('http://127.0.0.1:5000/OnlineClass/quizz-question/' + idQuizz).then(r => {
             $scope.listQuestion = r.data
-            $scope.startCountdown(45)
+            $scope.startCountdown(timeTest)
+            $scope.idQuizz = idQuizz
         })
     }
     // hàm lấy vào radio name khi click vào radio
     $scope.clickRadioAnswer = function (radioGroupName) {
         return radioGroupName;
+
     }
     // hàm kiểm tra radio đã chọn hay chưa
     $scope.isRadioSelected = function (radioGroupName) {
@@ -257,4 +265,32 @@ app.controller("class-ctrl", function ($scope, $http, $window, $filter, $interva
         return false;
     };
 
+//     create results
+// Lưu giá trị vào ng-model = selectResults
+    $scope.selectResults = {};
+// Cập nhật gái trị khi thay đổi
+    $scope.sendDataToAPI = function () {
+        // Khi nhận vào gái trị sẽ là {43:55} hàm này sẽ chuyển sang {question: 43, answer: 55}
+        function convertDataStructure(data) {
+            const resultArray = [];
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    resultArray.push({
+                        question: parseInt(key),
+                        answer: parseInt(data[key])
+                    });
+                }
+            }
+            return resultArray;
+        }
+
+        $scope.convertedData = convertDataStructure($scope.selectResults);
+        console.log($scope.convertedData)
+    };
+    $scope.createResults = function () {
+        $http.post('http://127.0.0.1:5000/OnlineClass/results/' + $scope.idQuizz, $scope.convertedData).then(r => {
+            $scope.listResults = r.data
+            $scope.stopTimer()
+        })
+    }
 });
