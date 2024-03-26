@@ -1,9 +1,9 @@
 import json
 
-from flask import Flask, render_template, redirect, Blueprint, url_for
+from flask import render_template, Blueprint, redirect
 from flask_login import login_required, logout_user, current_user
-from Utilities.Config import oauth
 import Services.AccountService as accountService
+import Services.LoginGoogleService as loginGoogle
 
 accountTemp_route = Blueprint('accountTemp_route', __name__)
 
@@ -20,12 +20,12 @@ def dang_ky():
 
 @accountTemp_route.route('/OnlineClass/login-google')
 def googleLogin():
-    return accountService.googleLogin()
+    return redirect(loginGoogle.login())
 
 
 @accountTemp_route.route('/OnlineClass/callback')
 def authorize():
-    return accountService.authorize()
+    return loginGoogle.callback()
 
 
 @accountTemp_route.route('/thong-tin', methods=['GET'])

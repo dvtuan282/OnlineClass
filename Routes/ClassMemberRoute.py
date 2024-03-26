@@ -32,3 +32,8 @@ def listInvitation():
 @classMemberRoute.route('/OnlineClass/create-members/<idClass>', methods=['POST'])
 def createMembers(idClass):
     return classMemberService.createMembersInClass(idClass)
+
+
+@classMemberRoute.route('/OnlineClass/member1/<idClass>', methods=['PUT'])
+def confirmJoinClass1(idClass):
+    return classMemberService.confirmJoinClass(idClass)

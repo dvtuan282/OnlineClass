@@ -13,6 +13,7 @@ class AccountModel(UserMixin, db.Model):
     password = db.Column(db.String(45))
     name = db.Column(db.String(45))
     avatar = db.Column(db.String(45))
+    idFolder = db.Column(db.String(100))
     """ 
         -Khi đặt relationship tại 1 trong 2 bảng có mỗi quan hệ với nhau, thì chúng
         ta có thể truy cập thuộc tính của đối tượng này thông qua đối tượng kia
@@ -27,6 +28,13 @@ class AccountModel(UserMixin, db.Model):
     '''Phương thức get_id được ghi đè lại từ UserMixin, do get_id nhận vào giá trị là id nhưng
     lớp account không có trường id nên phải định nghĩa lại.'''
 
+    def __init__(self, email, password, name, avatar, idFolder):
+        self.email = email
+        self.password = password
+        self.name = name
+        self.avatar = avatar
+        self.idFolder = idFolder
+
     def get_id(self):
         return str(self.email)
 
@@ -37,7 +45,7 @@ class AccountModel(UserMixin, db.Model):
 
 class AccountSchema(ma.Schema):
     class Meta:
-        fields = ('email', 'password', 'name', 'avatar')
+        fields = ('email', 'password', 'name', 'avatar', 'idFolder')
 
     @post_load
     def make_account(self, data, **kwargs):

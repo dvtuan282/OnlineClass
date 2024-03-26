@@ -16,6 +16,7 @@ class ClassModel(db.Model):
     creator = db.Column(db.String(45), db.ForeignKey('account.email'))
     dateCreated = db.Column(db.Date)
     background = db.Column(db.String(45))
+    folder = db.Column(db.String(100))
     post = db.relationship('PostModel', backref='class_post', lazy=True)
     classMember = db.relationship('ClassMemberModel', backref='class_classMember', lazy=True)
     quizzClass = db.relationship('QuizzClassModel', backref='class_quizzClass', lazy=True)
@@ -23,8 +24,7 @@ class ClassModel(db.Model):
 
 class ClassSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'className', 'creator', 'dateCreated', 'background')
-
+        fields = ('id', 'className', 'creator', 'dateCreated', 'background', 'folder')
     @post_load
     def make_classon(self, data, **kwargs):
         return ClassModel(**data)

@@ -1,12 +1,19 @@
+import json
+
 import unicodedata
-from flask import request, jsonify
+from flask import request, jsonify, session
 from flask_login import current_user
 import pandas as pd
+from google.oauth2.credentials import Credentials
+from Models.FolderClassModel import FolderClassModel, folderClassSchema
 from Models.ClassMemberModel import classesMemberSchema, classMemberSchema, ClassMemberModel
 from Models.ClassModel import ClassModel
 from Utilities.Config import db
 from Models.AccountModel import AccountModel
 from Utilities.Email import sendEmailTemplate
+import Services.LoginGoogleService as loginGoogle
+import Services.DaoService as daoService
+
 
 def createMemberInClass():
     data = request.json
@@ -35,6 +42,11 @@ def confirmJoinClass(idCLassMember):
         classMember = ClassMemberModel.query.get(idCLassMember)
         classMember.status = 0
         db.session.commit()
+        creds = Credentials.from_authorized_user_info(json.loads(session['creds']))
+        idFolder = loginGoogle.createFolder(creds, classMember.class_classMember.className, current_user.idFolder)
+        folderClass = FolderClassModel(idFolder, current_user.email, classMember.classOn)
+        print(folderClass.classOn)
+        daoService.create(folderClass)
         return jsonify({'message': 'Join class seccessfully'}), 200
     except Exception as e:
         db.session.rollback()
